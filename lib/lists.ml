@@ -31,3 +31,5 @@ let reverse list =
   in
   inner [] list
 ;;
+
+let is_palindrome list = reverse list = list

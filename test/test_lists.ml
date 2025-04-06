@@ -57,6 +57,16 @@ module ReverseTests = struct
   ;;
 end
 
+module IsPalindromeTests = struct
+  let suite =
+    "is_palindrome"
+    >::: [ ("it is"
+            >:: fun _ -> assert_equal true (is_palindrome [ "x"; "a"; "m"; "a"; "x" ]))
+         ; ("it is not" >:: fun _ -> assert_equal false (is_palindrome [ "a"; "b" ]))
+         ]
+  ;;
+end
+
 let () =
   run_test_tt_main
     ("All Lists suites"
@@ -65,5 +75,6 @@ let () =
           ; AtTests.suite
           ; LengthTests.suite
           ; ReverseTests.suite
+          ; IsPalindromeTests.suite
           ])
 ;;
