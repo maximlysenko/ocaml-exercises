@@ -46,8 +46,24 @@ module LengthTests = struct
   ;;
 end
 
+module ReverseTests = struct
+  let suite =
+    "reverse"
+    >::: [ ("empty list" >:: fun _ -> assert_equal [] (reverse []))
+         ; ("single element" >:: fun _ -> assert_equal [ "a" ] (reverse [ "a" ]))
+         ; ("multiple elements"
+            >:: fun _ -> assert_equal [ 3; 2; 1 ] (reverse [ 1; 2; 3 ]))
+         ]
+  ;;
+end
+
 let () =
   run_test_tt_main
     ("All Lists suites"
-     >::: [ LastTests.suite; LastTwoTests.suite; AtTests.suite; LengthTests.suite ])
+     >::: [ LastTests.suite
+          ; LastTwoTests.suite
+          ; AtTests.suite
+          ; LengthTests.suite
+          ; ReverseTests.suite
+          ])
 ;;

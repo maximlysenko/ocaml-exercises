@@ -23,3 +23,11 @@ let length list =
   in
   inner 0 list
 ;;
+
+let reverse list =
+  let rec inner acc = function
+    | [] -> acc
+    | x :: xs -> inner (x :: acc) xs
+  in
+  inner [] list
+;;
