@@ -12,4 +12,18 @@ module LastTests = struct
   ;;
 end
 
-let () = run_test_tt_main LastTests.suite
+module LastTwoTests = struct
+  let suite =
+    "last_two"
+    >::: [ ("empty list" >:: fun _ -> assert_equal None (last_two []))
+         ; ("one element" >:: fun _ -> assert_equal None (last_two [ 1 ]))
+         ; ("two elements"
+            >:: fun _ ->
+            assert_equal (Some ("hello", "world")) (last_two [ "hello"; "world" ]))
+         ; ("multiple elements"
+            >:: fun _ -> assert_equal (Some ("b", "c")) (last_two [ "a"; "b"; "c" ]))
+         ]
+  ;;
+end
+
+let () = run_test_tt_main ("All Lists suites" >::: [ LastTests.suite; LastTwoTests.suite ])
