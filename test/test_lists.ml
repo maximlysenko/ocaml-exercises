@@ -26,4 +26,17 @@ module LastTwoTests = struct
   ;;
 end
 
-let () = run_test_tt_main ("All Lists suites" >::: [ LastTests.suite; LastTwoTests.suite ])
+module AtTests = struct
+  let suite =
+    "at"
+    >::: [ ("empty list" >:: fun _ -> assert_equal None (at 0 []))
+         ; ("index 2" >:: fun _ -> assert_equal (Some 3) (at 2 [ 1; 2; 3 ]))
+         ; ("out of bounds" >:: fun _ -> assert_equal None (at 5 [ "a"; "b" ]))
+         ]
+  ;;
+end
+
+let () =
+  run_test_tt_main
+    ("All Lists suites" >::: [ LastTests.suite; LastTwoTests.suite; AtTests.suite ])
+;;

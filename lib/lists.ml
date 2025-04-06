@@ -9,3 +9,9 @@ let rec last_two = function
   | [ a; b ] -> Some (a, b)
   | _ :: xs -> last_two xs
 ;;
+
+let at index list =
+  match List.nth list index with
+  | x -> Some x
+  | exception Failure _ -> None
+;;
