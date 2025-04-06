@@ -15,3 +15,11 @@ let at index list =
   | x -> Some x
   | exception Failure _ -> None
 ;;
+
+let length list =
+  let rec inner acc = function
+    | [] -> acc
+    | _ :: xs -> inner (acc + 1) xs
+  in
+  inner 0 list
+;;

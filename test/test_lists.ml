@@ -36,7 +36,18 @@ module AtTests = struct
   ;;
 end
 
+module LengthTests = struct
+  let suite =
+    "length"
+    >::: [ ("empty list" >:: fun _ -> assert_equal 0 (length []))
+         ; ("multiple elements" >:: fun _ -> assert_equal 3 (length [ 1; 2; 3 ]))
+         ; ("single element" >:: fun _ -> assert_equal 1 (length [ "a" ]))
+         ]
+  ;;
+end
+
 let () =
   run_test_tt_main
-    ("All Lists suites" >::: [ LastTests.suite; LastTwoTests.suite; AtTests.suite ])
+    ("All Lists suites"
+     >::: [ LastTests.suite; LastTwoTests.suite; AtTests.suite; LengthTests.suite ])
 ;;
