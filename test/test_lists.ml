@@ -67,6 +67,20 @@ module IsPalindromeTests = struct
   ;;
 end
 
+module FlattenTests = struct
+  let suite =
+    "flatten"
+    >::: [ ("empty list" >:: fun _ -> assert_equal [] (flatten []))
+         ; ("should flatten"
+            >:: fun _ ->
+            assert_equal
+              [ "a"; "b"; "c"; "d"; "e" ]
+              (flatten [ One "a"; Many [ One "b"; Many [ One "c"; One "d" ]; One "e" ] ])
+           )
+         ]
+  ;;
+end
+
 let () =
   run_test_tt_main
     ("All Lists suites"
@@ -76,5 +90,6 @@ let () =
           ; LengthTests.suite
           ; ReverseTests.suite
           ; IsPalindromeTests.suite
+          ; FlattenTests.suite
           ])
 ;;
