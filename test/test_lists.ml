@@ -81,6 +81,21 @@ module FlattenTests = struct
   ;;
 end
 
+module CompressTests = struct
+  let suite =
+    "compress"
+    >::: [ ("empty list" >:: fun _ -> assert_equal [] (compress []))
+         ; ("should remove duplicates"
+            >:: fun _ ->
+            assert_equal
+              [ "a"; "b"; "c"; "a"; "d"; "e" ]
+              (compress
+                 [ "a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "e"; "e"; "e"; "e" ])
+           )
+         ]
+  ;;
+end
+
 let () =
   run_test_tt_main
     ("All Lists suites"
@@ -91,5 +106,6 @@ let () =
           ; ReverseTests.suite
           ; IsPalindromeTests.suite
           ; FlattenTests.suite
+          ; CompressTests.suite
           ])
 ;;

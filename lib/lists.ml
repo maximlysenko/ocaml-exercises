@@ -46,3 +46,13 @@ let flatten list =
   in
   reverse (inner [] list)
 ;;
+
+let compress list =
+  let rec inner result = function
+    | [] -> result
+    | a :: [] -> a :: result
+    | a :: b :: xs ->
+      if a = b then inner result (b :: xs) else inner (a :: result) (b :: xs)
+  in
+  reverse (inner [] list)
+;;
