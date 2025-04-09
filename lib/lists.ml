@@ -51,8 +51,20 @@ let compress list =
   let rec inner result = function
     | [] -> result
     | a :: [] -> a :: result
-    | a :: b :: xs ->
-      if a = b then inner result (b :: xs) else inner (a :: result) (b :: xs)
+    | a :: (b :: _ as tail) ->
+      if a = b then inner result tail else inner (a :: result) tail
   in
   reverse (inner [] list)
+;;
+
+let pack list =
+  let rec inner current result = function
+    | [] -> []
+    | [ a ] -> (a :: current) :: result
+    | a :: (b :: _ as tail) ->
+      if a = b
+      then inner (a :: current) result tail
+      else inner [] ((a :: current) :: result) tail
+  in
+  reverse (inner [] [] list)
 ;;

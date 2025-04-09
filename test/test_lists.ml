@@ -96,6 +96,40 @@ module CompressTests = struct
   ;;
 end
 
+module PackTests = struct
+  let suite =
+    "fn pack"
+    >::: [ ("should pack consecutive duplicates"
+            >:: fun _ ->
+            assert_equal
+              [ [ "a"; "a"; "a"; "a" ]
+              ; [ "b" ]
+              ; [ "c"; "c" ]
+              ; [ "a"; "a" ]
+              ; [ "d"; "d" ]
+              ; [ "e"; "e"; "e"; "e" ]
+              ]
+              (pack
+                 [ "a"
+                 ; "a"
+                 ; "a"
+                 ; "a"
+                 ; "b"
+                 ; "c"
+                 ; "c"
+                 ; "a"
+                 ; "a"
+                 ; "d"
+                 ; "d"
+                 ; "e"
+                 ; "e"
+                 ; "e"
+                 ; "e"
+                 ]))
+         ]
+  ;;
+end
+
 let () =
   run_test_tt_main
     ("All Lists suites"
@@ -107,5 +141,6 @@ let () =
           ; IsPalindromeTests.suite
           ; FlattenTests.suite
           ; CompressTests.suite
+          ; PackTests.suite
           ])
 ;;
